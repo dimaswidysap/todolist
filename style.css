@@ -34,6 +34,36 @@ main header span {
   font-size: 1.8em;
 }
 
+.container-input {
+  width: 100%;
+  margin: 3rem 0 3rem 0;
+}
+.container-input div {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 0 1rem 0 0;
+}
+
+.container-input div input {
+  flex: 1;
+  height: 2rem;
+  padding: 0 0 0 1rem;
+  border: none;
+  background: transparent;
+  outline: 1px solid black;
+  border-radius: 5px;
+}
+
+.container-input div button {
+  height: 2rem;
+  aspect-ratio: 1/1;
+}
+
+.container-input div button i {
+  scale: 1.4;
+}
+
 .container-list {
   width: 100%;
   display: flex;
@@ -52,11 +82,23 @@ main header span {
   flex: 1;
   padding: 0 0 0 0.5rem;
   font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.check,
+.check {
+  height: 70%;
+  cursor: pointer;
+}
+
 .delete {
   display: inline-flex;
   height: 90%;
   aspect-ratio: 1/1;
+}
+
+.konten-nonactive {
+  text-decoration: line-through;
+  color: rgb(129, 129, 129);
 }
