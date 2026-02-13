@@ -1,0 +1,9 @@
+@media (max-width: 640px) {
+  main header span {
+    font-weight: 900;
+    font-size: 1.3em;
+  }
+  .lists {
+    height: 2rem;
+  }
+}
