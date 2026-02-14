@@ -38,8 +38,8 @@ function displayLists() {
 }
 const containerList = document.querySelector(".container-list");
 const databases = [
-  "mencuci",
-  "mandi",
+  "mencuci baju",
+  "mandiin kucing",
   "makan makan makan makan makan makan makan",
 ];
 
@@ -48,6 +48,10 @@ const btnAdd = document.getElementById("btn-add");
 
 btnAdd.addEventListener("click", () => {
   const inputValue = inputList.value;
+  if (!inputValue) {
+    alert("catatan tidak boleh kosong");
+    return;
+  }
   databases.push(inputValue);
 
   containerList.innerHTML = "";
