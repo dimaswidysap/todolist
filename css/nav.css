@@ -6,6 +6,8 @@
   position: absolute;
   padding: 1rem 0.7rem;
   z-index: 100;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  transform: translateX(-110%);
 }
 .nav header {
   width: 100%;
@@ -20,6 +22,7 @@
 .nav header button {
   height: 3rem;
   aspect-ratio: 1/1;
+  color: var(--text);
 }
 
 .nav section:nth-child(2) {
@@ -32,8 +35,24 @@
 }
 
 .list button {
+  position: relative;
   font-weight: 800;
   color: var(--text);
+  background-color: var(--bg);
+  padding: 0.2rem 1rem;
+  border-radius: 5px;
+}
+
+.indikator {
+  display: inline-flex;
+  content: "";
+  position: absolute;
+  height: 0.3rem;
+  aspect-ratio: 1/1;
+  background-color: var(--success);
+  border-radius: 50%;
+  left: 100%;
+  bottom: 100%;
 }
 
 .nav section:nth-child(3) {

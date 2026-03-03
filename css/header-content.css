@@ -1,0 +1,17 @@
+.header-content {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  width: 100%;
+  z-index: 99;
+  /* height: 3rem; */
+  /* background-color: aqua; */
+}
+.header-content button {
+  display: block;
+  height: 3rem;
+  aspect-ratio: 1/1;
+  /* background-color: bisque; */
+  color: var(--text);
+  cursor: pointer;
+}

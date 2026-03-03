@@ -8,40 +8,79 @@
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/responsif.css" />
     <link rel="stylesheet" href="css/nav.css" />
+    <link rel="stylesheet" href="css/header-content.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
     <script type="module" src="javascript/main.js"></script>
     <script type="module" src="javascript/nav.js"></script>
+    <script type="module" src="javascript/header-content.js"></script>
   </head>
   <body>
     <main>
+      <!-- nav -->
       <nav class="nav">
         <header>
           <h2>Choose Activity</h2>
-          <button></button>
+          <button class="close-nav">
+            <span class="material-symbols-outlined">arrow_back</span>
+          </button>
         </header>
         <section>
           <ul>
-            <li class="list"><button class="btn-list">All</button></li>
-            <li class="list"><button class="btn-list">Work</button></li>
-            <li class="list"><button class="btn-list">Gaming</button></li>
-            <li class="list"><button class="btn-list">Food</button></li>
+            <li class="list">
+              <button class="btn-list">
+                <span class="indikator"></span>All
+              </button>
+            </li>
+            <li class="list">
+              <button class="btn-list">
+                <span class="indikator contentNoactive"></span>Work
+              </button>
+            </li>
+            <li class="list">
+              <button class="btn-list">
+                <span class="indikator contentNoactive"></span>Study
+              </button>
+            </li>
+            <li class="list">
+              <button class="btn-list">
+                <span class="indikator contentNoactive"></span>Gaming
+              </button>
+            </li>
+            <li class="list">
+              <button class="btn-list">
+                <span class="indikator contentNoactive"></span>Food
+              </button>
+            </li>
           </ul>
         </section>
         <section class="list">
           <button>Add more Activity</button>
         </section>
       </nav>
+      <!-- container-content -->
       <section class="container-list">
+        <header class="header-content">
+          <button class="open-nav">
+            <span class="material-symbols-outlined">menu</span>
+          </button>
+        </header>
         <div class="container-lists all-list">
           <header class="header-lists"><h2>All</h2></header>
         </div>
         <div class="container-lists all-list contentNoactive">
-          <header class="header-lists"><h2>Work</h2></header>
+          <header class="header-lists"><h2>Work 🛄</h2></header>
         </div>
         <div class="container-lists all-list contentNoactive">
-          <header class="header-lists"><h2>Gaming</h2></header>
+          <header class="header-lists"><h2>Study 📔</h2></header>
         </div>
         <div class="container-lists all-list contentNoactive">
-          <header class="header-lists"><h2>Food</h2></header>
+          <header class="header-lists"><h2>Gaming 🎮</h2></header>
+        </div>
+        <div class="container-lists all-list contentNoactive">
+          <header class="header-lists"><h2>Food 🍕</h2></header>
         </div>
       </section>
     </main>
