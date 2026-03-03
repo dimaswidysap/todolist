@@ -14,7 +14,6 @@ buttonList.forEach((items, index) => {
   items.addEventListener("click", () => {
     containerContent.forEach((content) => {
       content.classList.add("contentNoactive");
-      content.style.cssText = "none";
     });
 
     indikator.forEach((items) => {
@@ -24,8 +23,6 @@ buttonList.forEach((items, index) => {
     if (containerContent[index]) {
       containerContent[index].classList.remove("contentNoactive");
       indikator[index].classList.remove("contentNoactive");
-      containerContent[index].style.cssText =
-        "transition: all 0.4s ease-in-out;";
     }
   });
 });

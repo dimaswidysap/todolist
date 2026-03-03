@@ -43,6 +43,7 @@ main {
   width: 100%;
   height: 100svh;
   position: relative;
+  /* background-color: green; */
 }
 
 .container-lists {
@@ -52,6 +53,7 @@ main {
   inset: 0;
   padding: 1rem 10% 0;
   /* transition: all 0.3s ease-in-out; */
+  /* background-color: #0f172a; */
 }
 
 .header-lists {
@@ -59,5 +61,13 @@ main {
   width: 100%;
   justify-content: end;
   color: var(--text);
+  /* background-color: #38bdf8; */
+}
+
+.jhuokjd {
+  position: relative;
+  padding: 2rem 0 0 0;
+  height: 100%;
+  width: 100%;
   /* background-color: #38bdf8; */
 }

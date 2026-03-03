@@ -1,4 +1,5 @@
 .contentNoactive {
-  transform: translateY(2rem) !important;
-  opacity: 0 !important;
+  /* transform: translateY(2rem) !important;
+  opacity: 0 !important; */
+  display: none !important;
 }
