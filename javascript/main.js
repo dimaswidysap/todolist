@@ -72,7 +72,9 @@ const createTodoElement = (item) => {
 
   // Tombol Check/Uncheck
   const checkBtn = document.createElement("button");
-  checkBtn.textContent = item.isCompleted ? "Batal Check" : "Check";
+  checkBtn.textContent = item.isCompleted
+    ? "check_box"
+    : "check_box_outline_blank";
   checkBtn.addEventListener("click", () => {
     item.isCompleted = !item.isCompleted; // Toggle status
     saveToLocalStorage(); // TAMBAHAN: Simpan perubahan ke Local Storage
@@ -81,10 +83,15 @@ const createTodoElement = (item) => {
 
   // Tombol Hapus
   const deleteBtn = document.createElement("button");
-  deleteBtn.textContent = "Hapus";
+  deleteBtn.textContent = "delete";
   deleteBtn.addEventListener("click", () => {
     deleteItem(item.id);
   });
+
+  deleteBtn.classList.add("btn-aksi");
+  deleteBtn.classList.add("material-symbols-outlined");
+  checkBtn.classList.add("btn-aksi");
+  checkBtn.classList.add("material-symbols-outlined");
 
   div.append(textSpan, checkBtn, deleteBtn);
   return div;

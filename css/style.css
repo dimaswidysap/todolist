@@ -102,4 +102,22 @@ main {
   padding: 0.3rem 1rem;
   border-radius: 3px;
   font-weight: 600;
+  align-items: center;
+}
+
+.todo-item span {
+  flex: 1;
+
+  /* Tambahan agar teks turun ke bawah */
+  white-space: normal; /* Memastikan teks bisa membungkus ke baris baru */
+  overflow-wrap: break-word; /* Memecah kata yang terlalu panjang agar tidak keluar batas */
+  word-wrap: break-word; /* Fallback untuk browser lama */
+  min-width: 0; /* Sangat penting di Flexbox agar elemen tidak melebihi parent-nya */
+}
+.btn-aksi {
+  height: 2rem;
+  aspect-ratio: 1/1;
+  /* border-radius: 50%; */
+  /* background-color: #2dd4bf; */
+  color: var(--text);
 }
