@@ -23,6 +23,7 @@ buttonList.forEach((items, index) => {
     if (containerContent[index]) {
       containerContent[index].classList.remove("contentNoactive");
       indikator[index].classList.remove("contentNoactive");
+      contentGoLeft(conNav);
     }
   });
 });
