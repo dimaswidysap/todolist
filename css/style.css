@@ -39,35 +39,47 @@ main {
   overflow: hidden;
 }
 
-.container-list {
+.bhgjik {
   width: 100%;
   height: 100svh;
-  position: relative;
-  /* background-color: green; */
 }
 
-.container-lists {
-  height: 100svh;
+.bhgjik header,
+.bhgjik section {
   width: 100%;
-  position: absolute;
-  inset: 0;
-  padding: 1rem 10% 0;
-  /* transition: all 0.3s ease-in-out; */
-  /* background-color: #0f172a; */
-}
-
-.header-lists {
   display: flex;
-  width: 100%;
   justify-content: end;
+  padding: 2% 2% 0 0;
   color: var(--text);
-  /* background-color: #38bdf8; */
 }
 
-.jhuokjd {
-  position: relative;
-  padding: 2rem 0 0 0;
-  height: 100%;
-  width: 100%;
+.bhgjik header {
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.bhgjik section button {
   /* background-color: #38bdf8; */
+  /* width: 100%; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.bhgjik section button span {
+  background-color: var(--card);
+  padding: 0.3rem 0.8rem;
+  border-radius: 5px;
+  color: var(--success);
+  font-weight: 700;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.bhgjik section button i {
+  padding: 0.3rem;
+  background-color: var(--card);
+  color: var(--success);
+  border-radius: 50%;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }

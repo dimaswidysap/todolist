@@ -41,6 +41,11 @@
   background-color: var(--bg);
   padding: 0.2rem 1rem;
   border-radius: 5px;
+  transition: all 0.3s ease-in-out;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+.list button:active {
+  transform: scale(0.5);
 }
 
 .indikator {
