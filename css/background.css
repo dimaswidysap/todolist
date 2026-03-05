@@ -1,0 +1,35 @@
+.background {
+  position: absolute;
+  overflow: hidden;
+  inset: 0;
+  height: 100svh;
+  width: 100%;
+  /* background-color: aqua; */
+}
+
+.background span:nth-child(1) {
+  position: absolute;
+  display: inline-flex;
+  height: 50%;
+  aspect-ratio: 1/1;
+  /* background-color: var(--text); */
+  background-color: var(--primary);
+  opacity: 50%;
+  border-radius: 50%;
+  filter: blur(200px);
+  transform: translate(-50%, -50%);
+}
+.background span:nth-child(2) {
+  position: absolute;
+  display: inline-flex;
+  bottom: 0;
+  right: 0;
+  height: 50%;
+  aspect-ratio: 1/1;
+  background-color: var(--text);
+  /* background-color: var(--primary); */
+  opacity: 10%;
+  border-radius: 50%;
+  filter: blur(150px);
+  transform: translate(50%, 50%);
+}

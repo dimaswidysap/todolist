@@ -5,6 +5,7 @@ export class FormHandler {
     this.formContainer = document.querySelector(".container-form");
     this.formSubmit = document.getElementById("todoForm");
     this.taskInput = document.getElementById("taskInput");
+    this.dateInput = document.getElementById("date-list");
 
     this.onSubmitCallback = onSubmitCallback;
 
@@ -34,16 +35,24 @@ export class FormHandler {
   handleSubmit(e) {
     e.preventDefault();
     const taskValue = this.taskInput.value.trim();
+    let dateValue = this.dateInput.value;
 
     if (!taskValue) {
       alert("Catatan jangan kosong!");
       return;
     }
 
+    if (!dateValue) {
+      dateValue = "No deadline";
+    }
+
+    console.log(dateValue);
+
     // Masukkan index kategori ke dalam objek data yang akan dikirim
     const dataList = {
       id: Math.random().toString(36).slice(2, 9), // Praktik baik: berikan ID unik untuk kemudahan hapus/edit nanti
       content: taskValue,
+      date: dateValue,
       categoryId: this.activeCategoryIndex, // <--- Bawa data index ke main.js
     };
 

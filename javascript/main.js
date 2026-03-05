@@ -29,71 +29,118 @@ const saveToLocalStorage = () => {
 
 // 1. Fungsi untuk merender ulang semua list ke dalam container DOM
 const renderLists = () => {
-  // Kosongkan semua container terlebih dahulu agar tidak ada duplikasi saat render ulang
   conList.forEach((container) => {
     if (container) container.innerHTML = "";
   });
 
-  // Peta array ke index container masing-masing
   const listMappings = [
-    { array: allList, containerIndex: 0 },
-    { array: workList, containerIndex: 1 },
-    { array: studyList, containerIndex: 2 },
-    { array: gamingList, containerIndex: 3 },
-    { array: foodList, containerIndex: 4 },
+    { array: allList, containerIndex: 0, categoryName: "all" },
+    { array: workList, containerIndex: 1, categoryName: "work" },
+    { array: studyList, containerIndex: 2, categoryName: "study" },
+    { array: gamingList, containerIndex: 3, categoryName: "gaming" },
+    { array: foodList, containerIndex: 4, categoryName: "food" },
   ];
 
-  // Render setiap item di array ke container yang sesuai
-  listMappings.forEach(({ array, containerIndex }) => {
+  listMappings.forEach(({ array, containerIndex, categoryName }) => {
     const container = conList[containerIndex];
     if (!container) return;
 
     array.forEach((item) => {
-      const itemElement = createTodoElement(item);
+      // --- PERBAIKAN: Kirimkan categoryName saat membuat elemen ---
+      const itemElement = createTodoElement(item, categoryName);
       container.appendChild(itemElement);
     });
   });
 };
 
 // 2. Fungsi untuk membuat elemen HTML (List Item)
-const createTodoElement = (item) => {
-  const div = document.createElement("li");
-  div.classList.add("todo-item"); // Bisa ditambahkan styling di CSS
+// --- PERBAIKAN: Tambahkan parameter categoryName ---
+const createTodoElement = (item, categoryName = "default") => {
+  console.log(item);
 
-  // Teks tugas (Sesuaikan "item.title" dengan key yang kamu gunakan di form)
+  const div = document.createElement("li");
+  div.classList.add("todo-item");
+
   const textSpan = document.createElement("span");
   textSpan.textContent = item.content || "Tugas Tanpa Judul";
 
-  // Jika statusnya checked/completed, beri coretan
   if (item.isCompleted) {
     textSpan.style.textDecoration = "line-through";
     textSpan.style.opacity = "0.6";
   }
 
-  // Tombol Check/Uncheck
   const checkBtn = document.createElement("button");
   checkBtn.textContent = item.isCompleted
     ? "check_box"
     : "check_box_outline_blank";
+  checkBtn.classList.add("btn-aksi", "material-symbols-outlined");
+
   checkBtn.addEventListener("click", () => {
-    item.isCompleted = !item.isCompleted; // Toggle status
-    saveToLocalStorage(); // TAMBAHAN: Simpan perubahan ke Local Storage
-    renderLists(); // Render ulang UI
+    item.isCompleted = !item.isCompleted;
+    saveToLocalStorage();
+    renderLists();
   });
 
-  // Tombol Hapus
   const deleteBtn = document.createElement("button");
   deleteBtn.textContent = "delete";
+  deleteBtn.classList.add("btn-aksi", "material-symbols-outlined");
   deleteBtn.addEventListener("click", () => {
     deleteItem(item.id);
   });
 
-  deleteBtn.classList.add("btn-aksi");
-  deleteBtn.classList.add("material-symbols-outlined");
-  checkBtn.classList.add("btn-aksi");
-  checkBtn.classList.add("material-symbols-outlined");
+  const containerMoreInfo = document.createElement("div");
+  containerMoreInfo.classList.add("container-more-info");
 
-  div.append(textSpan, checkBtn, deleteBtn);
+  const conDate = document.createElement("div");
+  conDate.classList.add("jsuis");
+  const dateP1 = document.createElement("p");
+  const dateP2 = document.createElement("p");
+  containerMoreInfo.append(conDate);
+  conDate.appendChild(dateP1);
+  conDate.appendChild(dateP2);
+  dateP1.textContent = "Deadline :";
+  dateP2.textContent = `${!item.date ? "No Deadline" : item.date}`;
+
+  containerMoreInfo.style.display = "none";
+
+  // --- PERBAIKAN: ID Unik sekarang menggabungkan ID Item dan Nama Kategori ---
+  const uniqueId = `btn-more-${categoryName}-${item.id}`;
+
+  const btnMoreInfo = document.createElement("input");
+  btnMoreInfo.setAttribute("type", "checkbox");
+  btnMoreInfo.classList.add("btn-more-info");
+  btnMoreInfo.setAttribute("id", uniqueId);
+
+  const labelMoreIfo = document.createElement("label");
+  labelMoreIfo.classList.add("label-more-info");
+  labelMoreIfo.setAttribute("for", uniqueId);
+
+  const iconMoreInfo = document.createElement("i");
+  iconMoreInfo.classList.add("material-symbols-outlined");
+  iconMoreInfo.textContent = "arrow_drop_down";
+
+  labelMoreIfo.appendChild(iconMoreInfo);
+  btnMoreInfo.style.display = "none";
+
+  btnMoreInfo.addEventListener("change", function () {
+    if (this.checked) {
+      containerMoreInfo.style.display = "block";
+      iconMoreInfo.textContent = "arrow_drop_up";
+    } else {
+      containerMoreInfo.style.display = "none";
+      iconMoreInfo.textContent = "arrow_drop_down";
+    }
+  });
+
+  div.append(
+    textSpan,
+    checkBtn,
+    deleteBtn,
+    labelMoreIfo,
+    btnMoreInfo,
+    containerMoreInfo,
+  );
+
   return div;
 };
 
