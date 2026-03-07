@@ -1,0 +1,23 @@
+.con-form-edit {
+  display: none;
+}
+.btn-edit {
+  width: 100%;
+  background-color: var(--bg);
+  margin-top: 0.5rem;
+  border-radius: 2px;
+  padding: 0.2rem 0;
+  display: flex;
+  gap: 0.3rem;
+  color: var(--text);
+  align-items: center;
+  justify-content: center;
+}
+.btn-edit p {
+  /* color: var(--text); */
+  font-weight: 700;
+}
+
+.btn-edit i {
+  font-size: 1em;
+}

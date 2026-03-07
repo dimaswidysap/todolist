@@ -12,7 +12,8 @@
   z-index: 101;
 }
 
-#form-close {
+#form-close,
+#form-edit-close {
   position: absolute;
   top: 0;
   right: 0;

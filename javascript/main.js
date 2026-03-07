@@ -2,14 +2,19 @@ import { containerContent } from "./nav.js";
 import { FormHandler } from "./form-input.js";
 
 const conList = document.querySelectorAll(".container-lists");
+const conFormEdit = document.querySelector(".con-form-edit");
+const formEdit = document.getElementById("todoFormEdit");
+const btnCloseEdit = document.getElementById("form-edit-close");
+const taskEdit = document.getElementById("taskEdit");
+const dateEdit = document.getElementById("date-list-edit");
 
 let allList = [];
 let workList = [];
 let studyList = [];
 let gamingList = [];
 let foodList = [];
+let currentEditId = null;
 
-// --- TAMBAHAN: Fungsi Load dari Local Storage ---
 const loadFromLocalStorage = () => {
   allList = JSON.parse(localStorage.getItem("allList")) || [];
   workList = JSON.parse(localStorage.getItem("workList")) || [];
@@ -18,7 +23,6 @@ const loadFromLocalStorage = () => {
   foodList = JSON.parse(localStorage.getItem("foodList")) || [];
 };
 
-// --- TAMBAHAN: Fungsi Save ke Local Storage ---
 const saveToLocalStorage = () => {
   localStorage.setItem("allList", JSON.stringify(allList));
   localStorage.setItem("workList", JSON.stringify(workList));
@@ -27,7 +31,6 @@ const saveToLocalStorage = () => {
   localStorage.setItem("foodList", JSON.stringify(foodList));
 };
 
-// 1. Fungsi untuk merender ulang semua list ke dalam container DOM
 const renderLists = () => {
   conList.forEach((container) => {
     if (container) container.innerHTML = "";
@@ -46,18 +49,13 @@ const renderLists = () => {
     if (!container) return;
 
     array.forEach((item) => {
-      // --- PERBAIKAN: Kirimkan categoryName saat membuat elemen ---
       const itemElement = createTodoElement(item, categoryName);
       container.appendChild(itemElement);
     });
   });
 };
 
-// 2. Fungsi untuk membuat elemen HTML (List Item)
-// --- PERBAIKAN: Tambahkan parameter categoryName ---
 const createTodoElement = (item, categoryName = "default") => {
-  console.log(item);
-
   const div = document.createElement("li");
   div.classList.add("todo-item");
 
@@ -103,7 +101,6 @@ const createTodoElement = (item, categoryName = "default") => {
 
   containerMoreInfo.style.display = "none";
 
-  // --- PERBAIKAN: ID Unik sekarang menggabungkan ID Item dan Nama Kategori ---
   const uniqueId = `btn-more-${categoryName}-${item.id}`;
 
   const btnMoreInfo = document.createElement("input");
@@ -132,6 +129,24 @@ const createTodoElement = (item, categoryName = "default") => {
     }
   });
 
+  const btnEdit = document.createElement("button");
+  btnEdit.classList.add("btn-edit");
+  containerMoreInfo.appendChild(btnEdit);
+  const iconEdit = document.createElement("i");
+  iconEdit.classList.add("material-symbols-outlined");
+  const teksEdit = document.createElement("p");
+  teksEdit.textContent = "Edit";
+  iconEdit.textContent = "edit";
+
+  btnEdit.append(iconEdit, teksEdit);
+
+  btnEdit.addEventListener("click", () => {
+    currentEditId = item.id;
+    conFormEdit.style.display = "flex";
+    taskEdit.value = item.content;
+    dateEdit.value = item.date || "";
+  });
+
   div.append(
     textSpan,
     checkBtn,
@@ -144,7 +159,6 @@ const createTodoElement = (item, categoryName = "default") => {
   return div;
 };
 
-// 3. Fungsi untuk menghapus item dari semua array berdasarkan ID
 const deleteItem = (id) => {
   allList = allList.filter((item) => item.id !== id);
   workList = workList.filter((item) => item.id !== id);
@@ -152,26 +166,61 @@ const deleteItem = (id) => {
   gamingList = gamingList.filter((item) => item.id !== id);
   foodList = foodList.filter((item) => item.id !== id);
 
-  saveToLocalStorage(); // TAMBAHAN: Simpan perubahan ke Local Storage
-  renderLists(); // Render ulang UI setelah data dihapus
+  saveToLocalStorage();
+  renderLists();
 };
 
-// 4. Modifikasi fungsi penerima data dari form
+const updateItem = (id, newContent, newDate) => {
+  const updateArray = (arr) => {
+    return arr.map((item) => {
+      if (item.id === id) {
+        return { ...item, content: newContent, date: newDate };
+      }
+      return item;
+    });
+  };
+
+  allList = updateArray(allList);
+  workList = updateArray(workList);
+  studyList = updateArray(studyList);
+  gamingList = updateArray(gamingList);
+  foodList = updateArray(foodList);
+
+  saveToLocalStorage();
+  renderLists();
+};
+
+if (formEdit) {
+  formEdit.addEventListener("submit", (e) => {
+    e.preventDefault();
+    if (currentEditId) {
+      updateItem(currentEditId, taskEdit.value, dateEdit.value);
+      conFormEdit.style.display = "none";
+      formEdit.reset();
+      currentEditId = null;
+    }
+  });
+}
+
+if (btnCloseEdit) {
+  btnCloseEdit.addEventListener("click", () => {
+    conFormEdit.style.display = "none";
+    formEdit.reset();
+    currentEditId = null;
+  });
+}
+
 const receiveDataFromForm = (dataList) => {
-  // Tambahkan ID unik dan status isCompleted bawaan jika belum ada dari form
   const newItem = {
     ...dataList,
     id: dataList.id || Date.now().toString(),
     isCompleted: dataList.isCompleted || false,
   };
 
-  // Selalu simpan semua catatan ke dalam allList
   allList.push(newItem);
 
-  // Cek categoryId (index tombol) dan distribusikan
   switch (newItem.categoryId) {
     case 0:
-      console.log("Kategori Umum (All), masuk ke index 0.");
       break;
     case 1:
       workList.push(newItem);
@@ -185,16 +234,12 @@ const receiveDataFromForm = (dataList) => {
     case 4:
       foodList.push(newItem);
       break;
-    default:
-      console.log(`Index ${newItem.categoryId} tidak dikenali.`);
-      break;
   }
 
-  saveToLocalStorage(); // TAMBAHAN: Simpan data baru ke Local Storage
+  saveToLocalStorage();
   renderLists();
 };
 
-// --- TAMBAHAN: Eksekusi Load & Render saat file JavaScript pertama kali dijalankan ---
 loadFromLocalStorage();
 renderLists();
 
